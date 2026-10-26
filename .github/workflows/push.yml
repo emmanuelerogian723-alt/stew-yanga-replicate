@@ -17,7 +17,7 @@ jobs:
           chmod +x /usr/local/bin/cog
           cog --help > /dev/null && echo "cog binary OK"
       - name: Login to Replicate
-        run: cog login --token "$REPLICATE_API_TOKEN"
+        run: cog login --token-stdin <<< "$REPLICATE_API_TOKEN"
         env:
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
       - name: Push model to Replicate
