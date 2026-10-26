@@ -1,0 +1,23 @@
+name: Publish Stew Yanga to Replicate
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install cog
+        run: pip install cog
+      - name: Login to Replicate
+        run: cog login --token "$REPLICATE_API_TOKEN"
+        env:
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+      - name: Push model to Replicate
+        run: cog push emmanuelerogian723-alt/stew-yanga
+      - name: Done
+        run: echo "LIVE at https://replicate.com/emmanuelerogian723-alt/stew-yanga"
