@@ -15,7 +15,7 @@ jobs:
         run: |
           curl -sL -o /usr/local/bin/cog https://github.com/replicate/cog/releases/latest/download/cog_Linux_x86_64
           chmod +x /usr/local/bin/cog
-          cog version
+          cog --help > /dev/null && echo "cog binary OK"
       - name: Login to Replicate
         run: cog login --token "$REPLICATE_API_TOKEN"
         env:
